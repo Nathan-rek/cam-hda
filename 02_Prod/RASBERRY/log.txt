@@ -1,0 +1,63 @@
+   self.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/__init__.py", line 196, in init
+    _os_keyboard.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 113, in init
+    build_device()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 109, in build_device
+    ensure_root()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixcommon.py", line 174, in ensure_root
+    raise ImportError('You must be root to use this library on linux.')
+ImportError: You must be root to use this library on linux.
+
+
+0: 640x640 (no detections), 389.6ms
+Speed: 17.5ms preprocess, 389.6ms inference, 2.9ms postprocess per image at shape (1, 3, 640, 640)
+Erreur de traitement du cadre : You must be root to use this library on linux.
+Traceback complet : Traceback (most recent call last):
+  File "/home/pi-1/Documents/nathan/cam-hda/all/live-picam.py", line 101, in <module>
+    if keyboard.is_pressed('q'):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/__init__.py", line 410, in is_pressed
+    _listener.start_if_necessary()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_generic.py", line 35, in start_if_necessary
+    self.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/__init__.py", line 196, in init
+    _os_keyboard.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 113, in init
+    build_device()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 109, in build_device
+    ensure_root()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixcommon.py", line 174, in ensure_root
+    raise ImportError('You must be root to use this library on linux.')
+ImportError: You must be root to use this library on linux.
+
+
+0: 640x640 (no detections), 389.1ms
+Speed: 16.9ms preprocess, 389.1ms inference, 3.1ms postprocess per image at shape (1, 3, 640, 640)
+FPS : 3
+Erreur de traitement du cadre : You must be root to use this library on linux.
+Traceback complet : Traceback (most recent call last):
+  File "/home/pi-1/Documents/nathan/cam-hda/all/live-picam.py", line 101, in <module>
+    if keyboard.is_pressed('q'):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/__init__.py", line 410, in is_pressed
+    _listener.start_if_necessary()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_generic.py", line 35, in start_if_necessary
+    self.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/__init__.py", line 196, in init
+    _os_keyboard.init()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 113, in init
+    build_device()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixkeyboard.py", line 109, in build_device
+    ensure_root()
+  File "/home/pi-1/Documents/nathan/cam-hda/venv2/lib/python3.11/site-packages/keyboard/_nixcommon.py", line 174, in ensure_root
+    raise ImportError('You must be root to use this library on linux.')
+ImportError: You must be root to use this library on linux.
+
+
+^Z[3]   Killed                  python live-picam.py
+
+[4]+  Stopped                 python live-picam.py
+(venv2) pi-1@raspberrypi:~/Documents/nathan/cam-hda/all $ ^C
+(venv2) pi-1@raspberrypi:~/Documents/nathan/cam-hda/all $ nano log.txt 
+(venv2) pi-1@raspberrypi:~/Documents/nathan/cam-hda/all $ 

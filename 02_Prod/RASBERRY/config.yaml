@@ -1,0 +1,8 @@
+path: C:\Users\prost\OneDrive\Documents\SCHOOL\ERG\Internet-et-programations\B3\camera-HDA\YOLOv8\rohtko2\01_Sources
+train: images/train
+val: images/train
+
+
+# Classes
+names:
+  0: rothko

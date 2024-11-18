@@ -1,0 +1,5 @@
+from ultralytics import YOLO
+# Load a model
+model = YOLO("judd_edgetpu.tflite", task='detect')  # Load an official model or custom model
+# Run Prediction
+model.predict("judd-img.jpg", device="tpu:0")
