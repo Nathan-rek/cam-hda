@@ -6,9 +6,9 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f'Device: {device}')
 
 # Chargez le modèle
-model = YOLO("yolov8n.yaml")
+model = YOLO("yolov8n.pt")
 
 # Entraînez le modèle en utilisant le GPU
-model.train(data="config.yaml", epochs=75)
+model.train(data="config.yaml", epochs=75,  imgsz=640)
 
 print(epochs)
