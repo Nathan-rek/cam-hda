@@ -15,5 +15,18 @@ Tuto and help
     - [raspicam](https://github.com/google-coral/examples-camera/tree/master/raspicam)
  - ### [Edge TPU Compiler](https://coral.ai/docs/edgetpu/compiler/)
 
+## TensorFlow
+
+Created your own edgetpu.tflite model
+
+-  I use this one [Retrain SSD MobileNet V1 object detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) because i meet issue with the two google colab.
+  - Assiste with tutorial[DIY Custom Object Detection Model via Transfer Learning (Tensorflow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=217s) by Edgecate
+**Be careful For this Docker you need a AMD64 Architecture so aarch64 and armv7i can't build docker image**
+
+Google colab who can create model:
+- [Retrain EfficientDet-Lite object detector on Google Colab (TF2)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_efficientdet_model_maker_tf2.ipynb)
+- [Retrain SSDLite MobileDet object detector on Google Colab (TF1)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb)
+
+
 
  
