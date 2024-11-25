@@ -10,10 +10,9 @@
     
 **Command to Create a TFRecord**:
 
-    If you need to create a TFRecord, use the following command:
+If you need to create a TFRecord, use the following command:
 
-    ```bash
-    python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --dat_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
+    ```python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --dat_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
     ```
 
 4. **Inspecting Your Model**:
