@@ -1,55 +1,69 @@
-Tuto and help 
+# TensorFlow - Model Conversion and Edge TPU Usage
 
-# TensorFlow
+## Introduction
 
-Created your own edgetpu.tflite model
+This guide explains how to create a custom EdgeTPU-compatible `.tflite` model using various tools, resources, and tutorials. It also addresses some common issues when working with models like YOLO and provides a few resources for better understanding the conversion process.
 
--  I use this one [Retrain SSD MobileNet V1 object detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) because i meet issue with the two google colab.
-  - Assiste with tutorial[DIY Custom Object Detection Model via Transfer Learning (Tensorflow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=217s) by [Edgecate](https://www.youtube.com/@edgecate)
-    - Command for mackin a tfr record  
+## Create Your Own EdgeTPU-Compatible `.tflite` Model
 
-'''
-python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_pa
-th=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt  --dat_dir=/tensorflow/models/research/learn_pet/pet/ --out
-put_dir=/tensorflow/models/research/learn_pet//pet/
-'''
+1. **Creating a TensorFlow Lite Model**:  
+   I used the tutorial [Retrain SSD MobileNet V1 Object Detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) to create my EdgeTPU-compatible model. I faced issues with two Google Colab tutorials, but this one worked well for me.
+   
+2. **Helpful Video Tutorials**:
+    - [DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=217s) by [Edgecate](https://www.youtube.com/@edgecate)
+    
+3. **Command to Create a TFRecord**:
 
-You can use [netron.app](https://netron.app/) for checking your model structure.
+    If you need to create a TFRecord, use the following command:
 
-**Be careful For this Docker you need a AMD64 Architecture so aarch64 and armv7i can't build docker image**
+    ```bash
+    python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --dat_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
+    ```
 
-If you want to convert a YOLO model to an EdgeTPU-compatible .tflite model, you need to apply int8 quantization
+4. **Inspecting Your Model**:
+    - You can use [Netron](https://netron.app/) to check the structure of your model.
 
-- I try to convert yolov8 model to edgetpu.tflite model for using tflite interpreter optimise for coral. But when i use converted model i found some issue but i think it's possible because this video [coral TPU yolov5s](https://www.youtube.com/watch?v=D9IExho8pwo)show live objet detection
+5. **Important Notes**:
+    - Be cautious: for Docker, you need an AMD64 architecture. **aarch64** and **armv7i** architectures cannot build the Docker image.
 
-i think this git https://github.com/zldrobit/yolov5 can help for conversion in yolo5 base model
+## YOLO Model Conversion
 
+If you want to convert a YOLO model to an EdgeTPU-compatible `.tflite` model, you need to apply **int8 quantization**. Here's what I've learned so far:
 
+- I tried converting a YOLOv8 model to an EdgeTPU-compatible `.tflite` model for use with the TensorFlow Lite interpreter optimized for Coral. While I encountered some issues, I believe it's possible to make it work.  
+- You can check out this video on [Coral TPU YOLOv5s](https://www.youtube.com/watch?v=D9IExho8pwo) for live object detection using a YOLO model on EdgeTPU.
+  
+For converting a YOLOv5 model, the following GitHub repository may help:
 
-Google colab who can create model:
-- [Retrain EfficientDet-Lite object detector on Google Colab (TF2)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_efficientdet_model_maker_tf2.ipynb)
-- [Retrain SSDLite MobileDet object detector on Google Colab (TF1)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb)
+- [YOLOv5 Conversion Repository](https://github.com/zldrobit/yolov5)
 
+## Google Colab Tutorials for Model Creation
 
+Here are some helpful Google Colab tutorials that can help you create your model:
 
+- [Retrain EfficientDet-Lite Object Detector on Google Colab (TF2)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_efficientdet_model_maker_tf2.ipynb)
+- [Retrain SSDLite MobileDet Object Detector on Google Colab (TF1)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb)
 
-## [DAVID NYARKO](https://github.com/DAVIDNYARKO123)
-- [edge-tpu-silva](https://github.com/DAVIDNYARKO123/edge-tpu-silva)
+## Helpful Resources
 
-## [Ultralytics doc](https://docs.ultralytics.com/fr/modes/export/)
+### [DAVID NYARKO](https://github.com/DAVIDNYARKO123)
+- [edge-tpu-silva GitHub Repository](https://github.com/DAVIDNYARKO123/edge-tpu-silva)
 
-- [Coral Edge TPU sur un Raspberry Pi avec Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
+### [Ultralytics Documentation](https://docs.ultralytics.com/fr/modes/export/)
 
+- [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
 
-## Coral
+## Coral Resources
 
-- [Get started with the USB Accelerator](https://coral.ai/docs/accelerator/get-started)
-  - ### [Google-coral](https://github.com/google-coral/examples-camera)
-    - [raspicam](https://github.com/google-coral/examples-camera/tree/master/raspicam)
- - ### [Edge TPU Compiler](https://coral.ai/docs/edgetpu/compiler/)
+- [Get Started with the USB Accelerator](https://coral.ai/docs/accelerator/get-started)
+  
+### Additional Coral Resources:
 
+- [Google-Coral GitHub](https://github.com/google-coral/examples-camera)
+    - [Raspberry Pi Camera Examples](https://github.com/google-coral/examples-camera/tree/master/raspicam)
+  
+- [Edge TPU Compiler Documentation](https://coral.ai/docs/edgetpu/compiler/)
 
+---
 
-
-
- 
+This README provides links to essential resources for converting TensorFlow models to be EdgeTPU-compatible, as well as setup guides for various tools. By following these steps and using the resources linked above, you can create your own object detection models and run them efficiently on Coral's EdgeTPU devices.
