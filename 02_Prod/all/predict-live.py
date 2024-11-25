@@ -12,7 +12,7 @@ if not os.path.exists(capture_dir):
 
 # Initialisation de la capture webcam
 try:
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     print("Capture webcam réussie")
 except Exception as e:
     print(f"Erreur d'ouverture de la webcam : {e}")

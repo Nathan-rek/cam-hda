@@ -26,7 +26,9 @@ You can use [netron.app](https://netron.app/) for checking your model structure.
 
 **Be careful For this Docker you need a AMD64 Architecture so aarch64 and armv7i can't build docker image**
 
-- I try to convert yolov8 model to edgetpu.tflite model for using tfliter interpreter optimise for coral. But when i use converted model i foudn some issue but i think it's possible because this video [coral TPU yolov5s](https://www.youtube.com/watch?v=D9IExho8pwo)show live objet detection
+If you want to convert a YOLO model to an EdgeTPU-compatible .tflite model, you need to apply int8 quantization
+
+- I try to convert yolov8 model to edgetpu.tflite model for using tflite interpreter optimise for coral. But when i use converted model i found some issue but i think it's possible because this video [coral TPU yolov5s](https://www.youtube.com/watch?v=D9IExho8pwo)show live objet detection
 
 i think this git https://github.com/zldrobit/yolov5 can help for conversion in yolo5 base model
 
