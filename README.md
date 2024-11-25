@@ -12,8 +12,8 @@
 
 If you need to create a TFRecord, use the following command:
 
-    ```python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --dat_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
-    ```
+    python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --dat_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
+    
 
 4. **Inspecting Your Model**:
     - You can use [Netron](https://netron.app/) to check the structure of your model.
