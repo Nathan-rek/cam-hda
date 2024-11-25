@@ -1,18 +1,14 @@
-# TensorFlow - Model Conversion and Edge TPU Usage
-
-## Introduction
-
-This guide explains how to create a custom EdgeTPU-compatible `.tflite` model using various tools, resources, and tutorials. It also addresses some common issues when working with models like YOLO and provides a few resources for better understanding the conversion process.
+# TensorFlow - Model Conversion and Edge TPU 
 
 ## Create Your Own EdgeTPU-Compatible `.tflite` Model
 
-1. **Creating a TensorFlow Lite Model**:  
+**Creating a TensorFlow Lite Model**:  
    I used the tutorial [Retrain SSD MobileNet V1 Object Detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) to create my EdgeTPU-compatible model. I faced issues with two Google Colab tutorials, but this one worked well for me.
    
-2. **Helpful Video Tutorials**:
+**Video Tutorials**:
     - [DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=217s) by [Edgecate](https://www.youtube.com/@edgecate)
     
-3. **Command to Create a TFRecord**:
+**Command to Create a TFRecord**:
 
     If you need to create a TFRecord, use the following command:
 
@@ -36,13 +32,6 @@ If you want to convert a YOLO model to an EdgeTPU-compatible `.tflite` model, yo
 For converting a YOLOv5 model, the following GitHub repository may help:
 
 - [YOLOv5 Conversion Repository](https://github.com/zldrobit/yolov5)
-
-## Google Colab Tutorials for Model Creation
-
-Here are some helpful Google Colab tutorials that can help you create your model:
-
-- [Retrain EfficientDet-Lite Object Detector on Google Colab (TF2)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_efficientdet_model_maker_tf2.ipynb)
-- [Retrain SSDLite MobileDet Object Detector on Google Colab (TF1)](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb)
 
 ## Helpful Resources
 
