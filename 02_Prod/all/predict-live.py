@@ -3,6 +3,21 @@ from ultralytics import YOLO
 import cv2
 import traceback
 import time
+import socket
+
+
+# Configuration pour l'envoi UDP
+UDP_IP = '127.0.0.1'  # Adresse IP du destinataire
+UDP_PORT = 12345      # Port du destinataire
+udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Création du socket UDP
+
+# Création du socket UDP
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((UDP_IP, UDP_PORT))
+
+print(f"Serveur UDP en écoute sur {UDP_IP}:{UDP_PORT}")
+
+
 
 # Création d'un dossier pour sauvegarder les captures
 capture_dir = 'capture'
@@ -12,7 +27,7 @@ if not os.path.exists(capture_dir):
 
 # Initialisation de la capture webcam
 try:
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     print("Capture webcam réussie")
 except Exception as e:
     print(f"Erreur d'ouverture de la webcam : {e}")
@@ -89,7 +104,6 @@ while cap.isOpened():
                 confidence_percentage = f"{score * 100:.2g}%"
 #                 confidence_percentage = int(confidence_percentage)
                 label = f"{results.names[int(class_id)]}: {confidence_percentage}"
-                
                 if y1 or y2 < frame_height:
                     cv2.putText(frame, label, (int(x1), int(y1 - 20)),
                         cv2.FONT_HERSHEY_DUPLEX, 0.8, color, 1, cv2.LINE_AA)
@@ -101,6 +115,10 @@ while cap.isOpened():
         
                 detection_made = True  # Indiquer qu'une détection a été faite
                 print(x1, x2, y1, y2)
+                
+                udp_message = str(int(x1))
+                udp_socket.sendto(udp_message.encode(), (UDP_IP, UDP_PORT))
+                print(f"Valeur de x1 envoyée via UDP : {udp_message}")
                 
 #                 if x1 or x2 > frame_width:
 #                     cv2.putText(frame, label, (int(x1 + 15), int(y1 + 15)),

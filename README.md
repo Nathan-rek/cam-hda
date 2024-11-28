@@ -13,7 +13,9 @@
 If you need to create a TFRecord, use the following command:
 
     python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --data_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
-    
+
+After model train convert it for Edge TPU
+
 
 4. **Inspecting Your Model**:
     - You can use [Netron](https://netron.app/) to check the structure of your model.
