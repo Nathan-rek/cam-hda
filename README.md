@@ -24,7 +24,7 @@ After model train convert it for Edge TPU
     - You can use [Netron](https://netron.app/) to check the structure of your model.
 
 5. **Important Notes**:
-    - Be cautious: for Docker, you need an AMD64 architecture. **aarch64** and **armv7i** architectures cannot build the Docker image.
+    - Be cautious: for Docker, you need an AMD64 architecture. **aarch64** and **armv7i** architectures cannot build the Docker image provided by google-coral.
 
 ## YOLO Model Conversion
 
