@@ -16,6 +16,8 @@ If you need to create a TFRecord, use the following command:
 
 After model train convert it for Edge TPU
 
+   ./convert_checkpoint_to_edgetpu_tflite.sh --checkpoint_num 500
+	
 
 4. **Inspecting Your Model**:
     - You can use [Netron](https://netron.app/) to check the structure of your model.
