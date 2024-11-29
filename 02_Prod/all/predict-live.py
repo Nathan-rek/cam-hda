@@ -51,7 +51,7 @@ lastframe = int(lastframe)
     
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter(f"output_{lastframe}.avi", fourcc, 6, (640,  480))
+out = cv2.VideoWriter(f"output_{lastframe}.avi", fourcc, 6, (1920,  1080))
 
 print(f"Résolution webcam : {frame_width}x{frame_height}")
 print(f"FPS webcam : {fps}")
