@@ -25,6 +25,8 @@ After model train convert it for Edge TPU
 
 5. **Important Notes**:
     - Be cautious: for Docker, you need an AMD64 architecture. **aarch64** and **armv7i** architectures cannot build the Docker image provided by google-coral.
+    - If you use a Google Coral, plug the coral on the blue usb port.
+
 
 ## YOLO Model Conversion
 
@@ -41,6 +43,8 @@ For converting a YOLOv5 model, the following GitHub repository may help:
 
 ### [DAVID NYARKO](https://github.com/DAVIDNYARKO123)
 - [edge-tpu-silva GitHub Repository](https://github.com/DAVIDNYARKO123/edge-tpu-silva)
+
+- [Edje Electronics / TensorFlow Lite Object Detection on Android and Raspberry Pi](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/tree/master)
 
 ### [Ultralytics Documentation](https://docs.ultralytics.com/fr/modes/export/)
 

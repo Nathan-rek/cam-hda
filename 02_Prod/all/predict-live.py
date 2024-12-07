@@ -4,177 +4,143 @@ import cv2
 import traceback
 import time
 import socket
-
-
-# Configuration pour l'envoi UDP
-UDP_IP = '127.0.0.1'  # Adresse IP du destinataire
-UDP_PORT = 12345      # Port du destinataire
-udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Création du socket UDP
-
-# Création du socket UDP
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((UDP_IP, UDP_PORT))
-
-print(f"Serveur UDP en écoute sur {UDP_IP}:{UDP_PORT}")
-
+import pygame
+import threading
+import wave
+import pyaudio
 
 
 # Création d'un dossier pour sauvegarder les captures
 capture_dir = 'capture'
-if not os.path.exists(capture_dir):
-    os.makedirs(capture_dir)
-    print(f"Dossier {capture_dir} créé pour stocker les captures")
+os.makedirs(capture_dir, exist_ok=True)
 
 # Initialisation de la capture webcam
-try:
-    cap = cv2.VideoCapture(0)
-    print("Capture webcam réussie")
-except Exception as e:
-    print(f"Erreur d'ouverture de la webcam : {e}")
-    exit()
-    
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    raise Exception("Erreur d'ouverture de la webcam")
 
-
-# Récupération des dimensions du flux vidéo
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 
+# Chargement du compteur lastframe
+lastframe_file = "frame-count.txt"
+if not os.path.exists(lastframe_file):
+    with open(lastframe_file, "w") as f:
+        f.write("0")
+with open(lastframe_file, "r") as f:
+    lastframe = int(f.read().strip())
 
-fichier = open("frame-count.txt", "r")
-   
-lastframe = fichier.read().strip()
-
-lastframe = int(lastframe)
-
-
-    
-# Define the codec and create VideoWriter object
+# Configuration de la sortie vidéo
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter(f"output_{lastframe}.avi", fourcc, 6, (1920,  1080))
+video_filename = f"output_{lastframe}.avi"
+out = cv2.VideoWriter(video_filename, fourcc, fps, (frame_width, frame_height))
 
-print(f"Résolution webcam : {frame_width}x{frame_height}")
-print(f"FPS webcam : {fps}")
+print(f"Vidéo enregistrée sous : {video_filename}")
 
-
-
-# Chargement du modèle
-
-model = input()
-model_path = os.path.join(model)
-print(f"Chemin du modèle : {model_path}")
+# Chargement du modèle YOLO
+model_path = input("Nom du modèle YOLO : ")
 assert os.path.exists(model_path), f"Fichier modèle non trouvé : {model_path}"
-
-try:
-    model = YOLO(model_path)  # chargement du modèle personnalisé
-    print("Modèle chargé avec succès")
-except Exception as e:
-    print(f"Erreur de chargement du modèle : {str(e)}")
-    print(f"Traceback complet : {traceback.format_exc()}")
-    exit()
-    
+model = YOLO(model_path)
 
 # Paramètres
-threshold = float(input())
-frame_count = 0 + lastframe
-fps_counter = 0
-start_time = time.time()
+threshold = float(input("Seuil de confiance : "))
+frame_count = lastframe
 
+# Configuration de pygame pour la musique
+pygame.init()
+pygame.mixer.init()
 
-while cap.isOpened():
-    try:
+music_file = "music.mp3"
+assert os.path.exists(music_file), f"Fichier musique non trouvé : {music_file}"
+pygame.mixer.music.load(music_file)
+pygame.mixer.music.play(-1)
+
+# Configuration de PyAudio pour capturer l'audio
+audio = pyaudio.PyAudio()
+audio_filename = f"audio_{lastframe}.wav"
+
+# Paramètres audio
+audio_format = pyaudio.paInt16
+channels = 2
+rate = 44100
+chunk = 1024
+
+# Fonction pour capturer l'audio
+def record_audio():
+    with wave.open(audio_filename, 'wb') as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(audio.get_sample_size(audio_format))
+        wf.setframerate(rate)
+
+        stream = audio.open(format=audio_format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
+        print("Enregistrement audio commencé...")
+        try:
+            while running:
+                data = stream.read(chunk)
+                wf.writeframes(data)
+        finally:
+            stream.stop_stream()
+            stream.close()
+            print("Enregistrement audio terminé.")
+
+# Thread pour l'enregistrement audio
+running = True
+audio_thread = threading.Thread(target=record_audio)
+audio_thread.start()
+
+try:
+    while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
-            print("Échec de la lecture du cadre")
             break
-        
+
         # Détection d'objets
         results = model(frame)[0]
+        max_score = 0.0
 
-        detection_made = False
-
-        # Dessin des boîtes englobantes et étiquettes sur le cadre
         for result in results.boxes.data.tolist():
             x1, y1, x2, y2, score, class_id = result
-
             if score > threshold:
-                color = (0, 0, 0)  # Couleur verte pour les boîtes englobantes
-                thickness = 1
-                cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), color, thickness)
-                confidence_percentage = f"{score * 100:.2g}%"
-#                 confidence_percentage = int(confidence_percentage)
-                label = f"{results.names[int(class_id)]}: {confidence_percentage}"
-                if y1 or y2 < frame_height:
-                    cv2.putText(frame, label, (int(x1), int(y1 - 20)),
-                        cv2.FONT_HERSHEY_DUPLEX, 0.8, color, 1, cv2.LINE_AA)
-                
-                else:
-                    cv2.putText(frame, label, (int(x1), int(y1 + 15)),
-                        cv2.FONT_HERSHEY_DUPLEX, 0.8, color, 1, cv2.LINE_AA)
-                    
-        
-                detection_made = True  # Indiquer qu'une détection a été faite
-                print(x1, x2, y1, y2)
-                
-                udp_message = str(int(x1))
-                udp_socket.sendto(udp_message.encode(), (UDP_IP, UDP_PORT))
-                print(f"Valeur de x1 envoyée via UDP : {udp_message}")
-                
-#                 if x1 or x2 > frame_width:
-#                     cv2.putText(frame, label, (int(x1 + 15), int(y1 + 15)),
-#                         cv2.FONT_HERSHEY_DUPLEX, 0.8, color, 1, cv2.LINE_AA)
-#                 if y1 or y2 > frame_height:
-#                     cv2.putText(frame, label, (int(x1 + 15), int(y1 + 15)),
-#                         cv2.FONT_HERSHEY_DUPLEX, 0.8, color, 1, cv2.LINE_AA)
-# 
-                    
-                    
+                color = (0, 255, 0)
+                cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
+                label = f"{results.names[int(class_id)]}: {score:.2f}"
+                cv2.putText(frame, label, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
+                max_score = max(max_score, score)
 
-        # Sauvegarder le cadre si une détection a été effectuée
-        if detection_made:
-            capture_filename = os.path.join(capture_dir, f"capture_{frame_count}.jpg")
-            cv2.imwrite(capture_filename, frame)
-            print(f"Image sauvegardée : {capture_filename}")
-            
+        # Ajustement du volume
+        volume = max_score
+        pygame.mixer.music.set_volume(volume)
+        print(f"Volume : {volume * 100:.1f}% (Score max : {max_score:.2f})")
 
-        # Affichage du cadre résultant
+        # Enregistrement du cadre
+        out.write(frame)
+
+        # Affichage
         cv2.imshow('Détection en temps réel', frame)
-
-        # Compteur FPS
-        fps_counter += 1
-        current_time = time.time()
-        
-        if current_time - start_time >= 1:
-            print(f"FPS : {fps_counter}")
-            fps_counter = 0
-            start_time = current_time
-
-        # Informations sur la détection
-        if frame_count % 10 == 0:
-            num_detections = len(results.boxes.data.tolist())
-            avg_inference_time = sum(results.speed.values()) / len(results.speed)
-            print(f"{frame_count} : {num_detections} détections, Temps d'inférence moyen : {avg_inference_time:.1f}ms")
-
-        # Sortie sur pression de 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
-            fichier = open("frame-count.txt", "r+")
-            fichier.seek(0)
-            fichier.write(str(frame_count))
-            fichier.close()
             break
-        
-        frame_count += 1
-        
-        
-        print(frame_count)
-        
 
-    except Exception as e:
-        print(f"Erreur de traitement du cadre : {str(e)}")
-        print(f"Traceback complet : {traceback.format_exc()}")
-    out.write(frame) 
-    
-# Libérer la webcam et fermer les fenêtres
-cap.release()
-out.release()
-cv2.destroyAllWindows()
+        frame_count += 1
+
+finally:
+    running = False
+    audio_thread.join()
+
+    # Sauvegarde de lastframe
+    with open(lastframe_file, "w") as f:
+        f.write(str(frame_count))
+
+    # Libération des ressources
+    cap.release()
+    out.release()
+    pygame.mixer.music.stop()
+    pygame.quit()
+    audio.terminate()
+    cv2.destroyAllWindows()
+
+# Fusion vidéo et audio avec FFmpeg
+output_filename = f"output_with_audio_{lastframe}.avi"
+os.system(f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}")
+
+print(f"Vidéo générée avec audio : {output_filename}")
