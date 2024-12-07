@@ -1,0 +1,8 @@
+pi-nath@raspberrypi:~/Documents/nathan/coral/tflite1 $ python3 judd-rec.py     --modeldir=all_models/     --graph=judd2_quant_edgetpu.tflite     --labels=labels-judd.txt  --threshold=0.5 --edgetpu
+[ WARN:0] global ../modules/videoio/src/cap_gstreamer.cpp (1824) handleMessage OpenCV | GStreamer warning: Embedded video playback halted; module v4l2src0 reported: Failed to allocate required memory.
+[ WARN:0] global ../modules/videoio/src/cap_gstreamer.cpp (914) open OpenCV | GStreamer warning: unable to start pipeline
+[ WARN:0] global ../modules/videoio/src/cap_gstreamer.cpp (501) isPipelinePlaying OpenCV | GStreamer warning: GStreamer: pipeline have not been created
+Traceback (most recent call last):
+  File "/home/pi-nath/Documents/nathan/coral/tflite1/judd-rec.py", line 170, in <module>
+    cv2.putText(frame_resized_display, 'FPS: {0:.2f}'.format(fps), (30, 50),
+NameError: name 'fps' is not defined
