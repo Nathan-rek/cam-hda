@@ -1,4 +1,4 @@
-FR
+# FR
 
 Le projet "Searching est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilsie un rabserry pi un pi camera et des modele tensoflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienter vers une utilisation specifique de ces outils.
 
@@ -29,11 +29,21 @@ J'ai utilisé la documentation officielle de Coral pour créer un modèle de dé
    
 2. **Remarque importante** : Le processus d'entraînement nécessite Docker configuré pour l'architecture **AMD64**, ce qui n'est pas compatible directement avec un Raspberry Pi (qui utilise l'architecture **armv7i**). J'ai donc installé Docker sur Windows et utilisé un émulateur Linux (comme **WSL2**) pour réaliser l'entraînement.
 
-3. Pour plus d'informations sur l'utilisation de Docker et la création de modèles, je recommande cette vidéo de [Edgecate](https://www.youtube.com/watch?v=OJ6IXygqgME&t=850s) : **DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)**.
+3. Pour plus d'informations sur l'utilisation de Docker et la création de modèles, je recommande cette vidéo de [Edgecate:**DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=850s)**.
 
 4. **Alternative avec Google Colab** : Vous pouvez également utiliser Google Colab pour entraîner votre modèle en utilisant ce [notebook Google Colab](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb#scrollTo=jcApdURAK28f).
 
-Une fois le modele cree vous pouvez m'utilsier avec les exemples propose dans le depot google-coral tflite1
+### Utilisation du modèle
+
+1. Afin de réaliser mes vidéos en meilleure résolution et avec un bon taux de FPS, j'utilise deux scripts. Le premier fait un enregistrement en direct de la PiCamera avec OpenCV en 1280x720 à 16 FPS, tout en effectuant simultanément une visualisation de la détection en 640x420. Toutefois, cette dernière ne contient pas les boîtes de détection sur la vidéo enregistrée en 1280x720, ce qui permet de gagner en FPS. Ce script génère également un tableau CSV qui sera ensuite utilisé pour la génération du son de la vidéo. Il sert aussi à nommer les fichiers en fonction de la dernière frame enregistrée avant. Cela permet de créer une séquence de capture vidéo.
+
+2. Ensuite, les vidéos sont compilées avec `merge.py`.
+
+3. Les vidéos sont ensuite analysées avec `video*judd`.
+
+Le premier script est inspiré d'une version modifiée du script [TFLite_detection_webcam.py](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) du dépôt **TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi** d'EdjeElectronics.
+tps://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) de EdjeElectronics
+
 
 
 
