@@ -1,3 +1,93 @@
+FR
+
+Le projet "Searching est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilsie un rabserry pi un pi camera et des modele tensoflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienter vers une utilisation specifique de ces outils.
+
+Searching consiste en la production d'une serie d'épisode de court film. C'est film sont realiser par des perosnne differnet mais on comme poitn commun l'utilisation d'un camera dote de reconnaissance de patterns.
+
+## Matériel Utilisé
+
+- **Raspberry Pi 4** : Flasché en 32 bits. Le choix du 32 bits est lié à des contraintes d’utilisation de la librairie PiCamera et OpenCV. En effet, MMAL (Multi-Media Abstraction Layer) n'est pas pris en charge en 64 bits. Pour plus d'informations, vous pouvez consulter ce post du forum Raspberry Pi concernant l'erreur [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
+  
+- **PiCamera V2** : Résolution vidéo de 1080p à 47 fps, 1640 x 1232 à 41 fps et 640 x 480 à 206 fps, ce qui est important pour le workflow de capture vidéo. [Spécifications matérielles](https://www.raspberrypi.com/documentation/accessories/camera.html).
+
+- **Google Coral USB Accelerator** : Utilisé pour accélérer les modèles TensorFlow Lite via le Edge TPU (Tensor Processing Unit).
+
+
+### Installation du Raspberry Pi OS (32-bit)
+
+1. Téléchargez l’image de Raspberry Pi OS (version 32-bit).
+2. Flashez l’image sur une carte SD en utilisant un outil comme [Raspberry Pi Imager](https://www.raspberrypi.org/software/).
+3. Insérez la carte SD dans le Raspberry Pi et démarrez le système.
+
+### Creation du modèle:
+
+## Entraînement du Modèle
+
+J'ai utilisé la documentation officielle de Coral pour créer un modèle de détection d'objets optimisé pour le Edge TPU. Voici les étapes :
+
+1. Suivez le tutoriel [Retrain SSD MobileNet V1 Object Detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) pour créer votre modèle.
+   
+2. **Remarque importante** : Le processus d'entraînement nécessite Docker configuré pour l'architecture **AMD64**, ce qui n'est pas compatible directement avec un Raspberry Pi (qui utilise l'architecture **armv7i**). J'ai donc installé Docker sur Windows et utilisé un émulateur Linux (comme **WSL2**) pour réaliser l'entraînement.
+
+3. Pour plus d'informations sur l'utilisation de Docker et la création de modèles, je recommande cette vidéo de [Edgecate](https://www.youtube.com/watch?v=OJ6IXygqgME&t=850s) : **DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)**.
+
+4. **Alternative avec Google Colab** : Vous pouvez également utiliser Google Colab pour entraîner votre modèle en utilisant ce [notebook Google Colab](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb#scrollTo=jcApdURAK28f).
+
+Une fois le modele cree vous pouvez m'utilsier avec les exemples propose dans le depot google-coral tflite1
+
+
+
+
+
+
+
+
+## Ressources Utiles
+
+Voici une liste de ressources qui peuvent vous aider tout au long du projet.
+
+### Tutoriels pour la création de modèles TFLite
+
+- [Retrain SSD MobileNet V1 Object Detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) – Tutoriel officiel de Coral pour entraîner un modèle de détection d'objets sur Google Colab.
+- [DIY Custom Object Detection Model via Transfer Learning (TensorFlow Lite Edge TPU)](https://www.youtube.com/watch?v=OJ6IXygqgME&t=850s) – Tutoriel vidéo de [Edgecate](https://www.youtube.com/@edgecate) expliquant comment créer un modèle de détection d'objets personnalisé à l'aide de TensorFlow Lite.
+- [Notebook Google Colab pour l'entraînement de modèles SSD MobileNet](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_ssdlite_mobiledet_qat_tf1.ipynb#scrollTo=jcApdURAK28f) – Utilisez ce notebook pour entraîner des modèles directement sur Google Colab.
+
+### Ressources supplémentaires pour la conversion des modèles pour Edge TPU
+
+- [Google Coral GitHub](https://github.com/google-coral/examples-camera) – Dépôt GitHub avec des exemples d'utilisation de Coral et des Raspberry Pi Camera.
+- [Edge TPU Compiler Documentation](https://coral.ai/docs/edgetpu/compiler/) – Documentation officielle pour compiler un modèle TensorFlow Lite pour Edge TPU.
+
+### Dépôts GitHub utiles
+
+- [Google Coral Edge TPU Examples](https://github.com/google-coral/examples-camera) – Exemples d'utilisation du Google Coral USB Accelerator avec des Raspberry Pi et des caméras.
+- [edge-tpu-silva GitHub Repository](https://github.com/DAVIDNYARKO123/edge-tpu-silva) – Un autre dépôt pour des exemples de projets utilisant le Coral USB Accelerator.
+
+### Documentation TensorFlow
+
+- [Documentation officielle de TensorFlow Lite](https://www.tensorflow.org/lite) – Guide complet sur TensorFlow Lite, y compris la conversion et l'optimisation des modèles.
+- [YOLOv5 Conversion Guide](https://docs.ultralytics.com/fr/modes/export/) – Tutoriel pour la conversion des modèles YOLOv5 en modèles TensorFlow Lite optimisés pour le Edge TPU.
+
+---
+
+## Problèmes et Dépannage
+
+### Problème de compatibilité avec Docker et Raspberry Pi
+
+Lors de la création du modèle avec Docker, j'ai rencontré des problèmes de compatibilité liés à l'architecture. Docker sur Raspberry Pi utilise **armv7i**, tandis que certains outils de création de modèles (comme ceux utilisés pour l'Edge TPU) nécessitent une architecture **AMD64**. Pour contourner cette limitation, j'ai utilisé Docker sur un système Windows via WSL2 (Windows Subsystem for Linux).
+
+### Problème de compatibilité MMAL en 64-bit
+
+Le problème d'incompatibilité avec MMAL (Multi-Media Abstraction Layer) en 64 bits empêche l'utilisation de certaines fonctionnalités de la caméra Pi sur des systèmes 64-bit. Le Raspberry Pi OS 32-bit est nécessaire pour garantir la compatibilité avec la caméra Pi et les bibliothèques comme OpenCV et PiCamera. Vous pouvez consulter plus de détails dans le post du forum Raspberry Pi [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
+
+
+
+
+
+ENG
+
+
+
+
 # TensorFlow - Model Conversion and Edge TPU 
 
 ## Create Your Own EdgeTPU-Compatible `.tflite` Model
