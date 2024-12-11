@@ -1,12 +1,12 @@
 01_sources/
-02_Prod/judd/01_sources/
-02_Prod/koons/01_sources/
-02_Prod/rothko/01_sources/
-02_Prod/rothko2/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/judd/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/koons/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/rothko/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/rothko2/01_sources/
 03_Render/judd-xp-1
-03_Render/MIX
-03_Render/koons-exp-1
-03_Render/rothko-xp-1
-03_Render/tflite1/001
+03_Render/EXTRAIT/MIX
+03_Render/EXTRAIT/koons-exp-1
+03_Render/EXTRAIT/rothko-xp-1
+03_Render/EXTRAIT/tflite1/001
 
 venv/
