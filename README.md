@@ -4,6 +4,31 @@ Le projet *"Searching"* est un projet qui nait dans le cadre d'une pratique arti
 
 Searching consiste en la production d'une série d'épisodes de court film. Ces films sont réalisées par des personnes différentes mais ont comme point commun l'utilisation d'une caméra doté de reconnaissance de patterns.
 
+
+
+## Table des matières
+
+1. [Introduction](#introduction)
+2. [Matériel Utilisé](#matériel-utilisé)
+   - [Raspberry Pi 4](#raspberry-pi-4)
+   - [PiCamera V2](#picamera-v2)
+   - [Google Coral USB Accelerator](#google-coral-usb-accelerator)
+3. [Installation du Raspberry Pi OS (32-bit)](#installation-du-raspberry-pi-os-32-bit)
+4. [Création du Modèle](#création-du-modèle)
+   - [Entraînement du Modèle](#entraînement-du-modèle)
+   - [Conversion pour Edge TPU](#conversion-pour-edge-tpu)
+5. [Utilisation du Modèle](#utilisation-du-modèle)
+6. [Ressources Utiles](#ressources-utiles)
+   - [Tutoriels pour la Création de Modèles TFLite](#tutoriels-pour-la-création-de-modèles-tflite)
+   - [Ressources pour la Conversion](#ressources-pour-la-conversion)
+   - [Dépôts GitHub Utiles](#dépôts-github-utiles)
+7. [Problèmes et Dépannage](#problèmes-et-dépannage)
+   - [Compatibilité Docker et Raspberry Pi](#problème-de-compatibilité-avec-docker-et-raspberry-pi)
+   - [Compatibilité MMAL en 64-bit](#problème-de-compatibilité-mmal-en-64-bit)
+
+---
+
+
 ## Matériel Utilisé
 
 - **Raspberry Pi 4** : Flasché en 32 bits. Le choix du 32 bits est lié à des contraintes d’utilisation de la librairie PiCamera et OpenCV. En effet, MMAL (Multi-Media Abstraction Layer) n'est pas pris en charge en 64 bits. Pour plus d'informations, vous pouvez consulter ce post du forum Raspberry Pi concernant l'erreur [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
@@ -89,9 +114,6 @@ L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un mom
 - [Ultralytics Documentation](https://docs.ultralytics.com/fr/modes/export/)
 
 - [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
-
-
-<!-- Section 1 -->
 
 
 ## Problèmes et Dépannage
