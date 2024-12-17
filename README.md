@@ -1,8 +1,8 @@
 # FR
 
-Le projet "Searching" est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilise un rasberry pi un pi camera et des modèles tensorflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienté vers une utilisation spécifique de ces outils.
+Le projet *"Searching"* est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilise un rasberry pi un pi camera et des modèles tensorflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienté vers une utilisation spécifique de ces outils.
 
-Searching consiste en la production d'une serie d'épisode de court film. ces films sont réalisées par des personnes différentes mais ont comme point commun l'utilisation d'une caméra doté de reconnaissance de patterns.
+Searching consiste en la production d'une série d'épisodes de court film. Ces films sont réalisées par des personnes différentes mais ont comme point commun l'utilisation d'une caméra doté de reconnaissance de patterns.
 
 ## Matériel Utilisé
 
@@ -15,9 +15,8 @@ Searching consiste en la production d'une serie d'épisode de court film. ces fi
 
 ### Installation du Raspberry Pi OS (32-bit)
 
-1. Téléchargez l’image de Raspberry Pi OS (version 32-bit).
-2. Flashez l’image sur une carte SD en utilisant un outil comme [Raspberry Pi Imager](https://www.raspberrypi.org/software/).
-3. Insérez la carte SD dans le Raspberry Pi et démarrez le système.
+1. Téléchargez l’image de Raspberry Pi OS (version 32-bit) et flashez l’image sur une carte SD en utilisant un outil comme [Raspberry Pi Imager](https://www.raspberrypi.org/software/).
+2. Insérez la carte SD dans le Raspberry Pi et démarrez le système.
 
 ### Creation du modèle:
 
@@ -50,14 +49,14 @@ After model train convert it for Edge TPU
 
 ### Utilisation du modèle
 
-1. Afin de réaliser mes vidéos en meilleure résolution et avec un bon taux de FPS, j'utilise deux scripts. Le premier fait un enregistrement en direct de la PiCamera avec OpenCV en 1280x720 à 16 FPS, tout en effectuant simultanément une visualisation de la détection en 640x420. Toutefois, cette dernière ne contient pas les boîtes de détection sur la vidéo enregistrée en 1280x720, ce qui permet de gagner en FPS. Ce script génère également un tableau CSV qui sera ensuite utilisé pour la génération du son de la vidéo. Il sert aussi à nommer les fichiers en fonction de la dernière frame enregistrée avant. Cela permet de créer une séquence de capture vidéo.
-
-2. Ensuite, les vidéos sont compilées avec `merge.py`.
-
-3. Les vidéos sont ensuite analysées avec `video*judd`.
-
-Le premier script est inspiré d'une version modifiée du script [TFLite_detection_webcam.py](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) du dépôt **TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi** d'EdjeElectronics.
+1. Afin de réaliser mes vidéos en meilleure résolution et avec un bon taux de FPS, j'utilise deux scripts.
+- Le premier fait un enregistrement en direct de la PiCamera avec OpenCV en 1280x720 à 16 FPS, tout en effectuant simultanément une visualisation de la détection en 640x420. Toutefois, cette dernière ne contient pas les boîtes de détection sur la vidéo enregistrée en 1280x720, ce qui permet de gagner en FPS. Ce script génère également un tableau CSV qui sera ensuite utilisé pour la génération du son de la vidéo. Il sert aussi à nommer les fichiers en fonction de la dernière frame enregistrée avant. Cela 
+permet de créer une séquence de capture vidéo.
+  - Ce premier script est inspiré d'une version modifiée du script [TFLite_detection_webcam.py](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) du dépôt **TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi** d'EdjeElectronics.
 tps://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) de EdjeElectronics
+- Le deuxième script compiles les vidéos à l'aide de ffmpeg et les analysent en dessinant les boites englobantes.
+
+
 
 
 
