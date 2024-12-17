@@ -70,12 +70,10 @@ Voici une liste de ressources qui peuvent vous aider tout au long du projet.
 ### Dépôts GitHub utiles
 
 - [Google Coral Edge TPU Examples](https://github.com/google-coral/examples-camera) – Exemples d'utilisation du Google Coral USB Accelerator avec des Raspberry Pi et des caméras.
-- [edge-tpu-silva GitHub Repository](https://github.com/DAVIDNYARKO123/edge-tpu-silva) – Un autre dépôt pour des exemples de projets utilisant le Coral USB Accelerator.
 
 ### Documentation TensorFlow
 
 - [Documentation officielle de TensorFlow Lite](https://www.tensorflow.org/lite) – Guide complet sur TensorFlow Lite, y compris la conversion et l'optimisation des modèles.
-- [YOLOv5 Conversion Guide](https://docs.ultralytics.com/fr/modes/export/) – Tutoriel pour la conversion des modèles YOLOv5 en modèles TensorFlow Lite optimisés pour le Edge TPU.
 
 ---
 
@@ -88,6 +86,19 @@ Lors de la création du modèle avec Docker, j'ai rencontré des problèmes de c
 ### Problème de compatibilité MMAL en 64-bit
 
 Le problème d'incompatibilité avec MMAL (Multi-Media Abstraction Layer) en 64 bits empêche l'utilisation de certaines fonctionnalités de la caméra Pi sur des systèmes 64-bit. Le Raspberry Pi OS 32-bit est nécessaire pour garantir la compatibilité avec la caméra Pi et les bibliothèques comme OpenCV et PiCamera. Vous pouvez consulter plus de détails dans le post du forum Raspberry Pi [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
+
+
+
+
+### Utilisation de Yolo
+
+L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un moment voici les dépôts et docs que j'ai trouvé pour utiliser ces modèles.
+- [YOLOv5 Conversion Guide](https://docs.ultralytics.com/fr/modes/export/) – Tutoriel pour la conversion des modèles YOLOv5 en modèles TensorFlow Lite optimisés pour le Edge TPU.
+- [edge-tpu-silva GitHub Repository](https://github.com/DAVIDNYARKO123/edge-tpu-silva) – Un autre dépôt pour des exemples de projets utilisant le Coral USB Accelerator.
+
+- [Ultralytics Documentation](https://docs.ultralytics.com/fr/modes/export/)
+
+- [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
 
 
 
