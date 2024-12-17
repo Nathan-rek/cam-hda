@@ -26,6 +26,21 @@ Searching consiste en la production d'une serie d'épisode de court film. C'est 
 J'ai utilisé la documentation officielle de Coral pour créer un modèle de détection d'objets optimisé pour le Edge TPU. Voici les étapes :
 
 1. Suivez le tutoriel [Retrain SSD MobileNet V1 Object Detector on Google Colab (TF1)](https://coral.ai/docs/edgetpu/retrain-detection/) pour créer votre modèle.
+
+
+**Command to Create a TFRecord**:
+
+If you need to create a TFRecord, use the following command:
+
+    python3 object_detection/dataset_tools/create_pet_tf_record.py --label_map_path=/tensorflow/models/research/learn_pet/pet/pet_label_map.pbtxt --data_dir=/tensorflow/models/research/learn_pet/pet/ --output_dir=/tensorflow/models/research/learn_pet//pet/
+
+After model train convert it for Edge TPU
+
+   
+    ./convert_checkpoint_to_edgetpu_tflite.sh --checkpoint_num 500
+	
+
+
    
 2. **Remarque importante** : Le processus d'entraînement nécessite Docker configuré pour l'architecture **AMD64**, ce qui n'est pas compatible directement avec un Raspberry Pi (qui utilise l'architecture **armv7i**). J'ai donc installé Docker sur Windows et utilisé un émulateur Linux (comme **WSL2**) pour réaliser l'entraînement.
 
@@ -43,11 +58,6 @@ J'ai utilisé la documentation officielle de Coral pour créer un modèle de dé
 
 Le premier script est inspiré d'une version modifiée du script [TFLite_detection_webcam.py](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) du dépôt **TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi** d'EdjeElectronics.
 tps://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi) de EdjeElectronics
-
-
-
-
-
 
 
 
