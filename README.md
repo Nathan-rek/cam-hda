@@ -84,21 +84,6 @@ Voici une liste de ressources qui peuvent vous aider tout au long du projet.
 
 - [Documentation officielle de TensorFlow Lite](https://www.tensorflow.org/lite) – Guide complet sur TensorFlow Lite, y compris la conversion et l'optimisation des modèles.
 
----
-
-## Problèmes et Dépannage
-
-### Problème de compatibilité avec Docker et Raspberry Pi
-
-Lors de la création du modèle avec Docker, j'ai rencontré des problèmes de compatibilité liés à l'architecture. Docker sur Raspberry Pi utilise **armv7i**, tandis que certains outils de création de modèles (comme ceux utilisés pour l'Edge TPU) nécessitent une architecture **AMD64**. Pour contourner cette limitation, j'ai utilisé Docker sur un système Windows via WSL2 (Windows Subsystem for Linux).
-
-### Problème de compatibilité MMAL en 64-bit
-
-Le problème d'incompatibilité avec MMAL (Multi-Media Abstraction Layer) en 64 bits empêche l'utilisation de certaines fonctionnalités de la caméra Pi sur des systèmes 64-bit. Le Raspberry Pi OS 32-bit est nécessaire pour garantir la compatibilité avec la caméra Pi et les bibliothèques comme OpenCV et PiCamera. Vous pouvez consulter plus de détails dans le post du forum Raspberry Pi [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
-
-
-
-
 ### Utilisation de Yolo
 
 L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un moment voici les dépôts et docs que j'ai trouvé pour utiliser ces modèles.
@@ -110,6 +95,19 @@ L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un mom
 - [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
 
 
+
+
+---
+
+## Problèmes et Dépannage
+
+### Problème de compatibilité avec Docker et Raspberry Pi
+
+Lors de la création du modèle avec Docker, j'ai rencontré des problèmes de compatibilité liés à l'architecture. Docker sur Raspberry Pi utilise **armv7i**, tandis que certains outils de création de modèles (comme ceux utilisés pour l'Edge TPU) nécessitent une architecture **AMD64**. Pour contourner cette limitation, j'ai utilisé Docker sur un système Windows via WSL2 (Windows Subsystem for Linux).
+
+### Problème de compatibilité MMAL en 64-bit
+
+Le problème d'incompatibilité avec MMAL (Multi-Media Abstraction Layer) en 64 bits empêche l'utilisation de certaines fonctionnalités de la caméra Pi sur des systèmes 64-bit. Le Raspberry Pi OS 32-bit est nécessaire pour garantir la compatibilité avec la caméra Pi et les bibliothèques comme OpenCV et PiCamera. Vous pouvez consulter plus de détails dans le post du forum Raspberry Pi [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
 
 
 
