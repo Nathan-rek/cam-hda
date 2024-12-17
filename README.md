@@ -90,6 +90,9 @@ L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un mom
 
 - [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
 
+***
+
+
 
 ## Problèmes et Dépannage
 
