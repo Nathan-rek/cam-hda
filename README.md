@@ -1,8 +1,8 @@
 # FR
 
-Le projet "Searching est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilsie un rabserry pi un pi camera et des modele tensoflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienter vers une utilisation specifique de ces outils.
+Le projet "Searching" est un projet qui nait dans le cadre d'une pratique artistique. Dans le cadre de ce projet j'utilise un rasberry pi un pi camera et des modèles tensorflow, leur utilisation est documenté ici. De par son cadre artistique la documentation est orienté vers une utilisation spécifique de ces outils.
 
-Searching consiste en la production d'une serie d'épisode de court film. C'est film sont realiser par des perosnne differnet mais on comme poitn commun l'utilisation d'un camera dote de reconnaissance de patterns.
+Searching consiste en la production d'une serie d'épisode de court film. ces films sont réalisées par des personnes différentes mais ont comme point commun l'utilisation d'une caméra doté de reconnaissance de patterns.
 
 ## Matériel Utilisé
 
