@@ -57,10 +57,6 @@ tps://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and
 - Le deuxième script compiles les vidéos à l'aide de ffmpeg et les analysent en dessinant les boites englobantes.
 
 
-
-
-
-
 ## Ressources Utiles
 
 Voici une liste de ressources qui peuvent vous aider tout au long du projet.
@@ -95,10 +91,6 @@ L'utilisation d'un modèle Yolo est aussi une solution, l'ayant envisagé un mom
 - [Coral Edge TPU on Raspberry Pi with Ultralytics YOLO11 🚀](https://docs.ultralytics.com/fr/guides/coral-edge-tpu-on-raspberry-pi/)
 
 
-
-
----
-
 ## Problèmes et Dépannage
 
 ### Problème de compatibilité avec Docker et Raspberry Pi
@@ -109,6 +101,9 @@ Lors de la création du modèle avec Docker, j'ai rencontré des problèmes de c
 
 Le problème d'incompatibilité avec MMAL (Multi-Media Abstraction Layer) en 64 bits empêche l'utilisation de certaines fonctionnalités de la caméra Pi sur des systèmes 64-bit. Le Raspberry Pi OS 32-bit est nécessaire pour garantir la compatibilité avec la caméra Pi et les bibliothèques comme OpenCV et PiCamera. Vous pouvez consulter plus de détails dans le post du forum Raspberry Pi [MMAL 64-bit support](https://github.com/raspberrypi/userland/issues/688).
 
+
+
+---
 
 
 ENG
@@ -179,6 +174,3 @@ For converting a YOLOv5 model, the following GitHub repository may help:
   
 - [Edge TPU Compiler Documentation](https://coral.ai/docs/edgetpu/compiler/)
 
----
-
-This README provides links to essential resources for converting TensorFlow models to be EdgeTPU-compatible, as well as setup guides for various tools. By following these steps and using the resources linked above, you can create your own object detection models and run them efficiently on Coral's EdgeTPU devices.
