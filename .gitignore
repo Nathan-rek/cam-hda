@@ -1,0 +1,17 @@
+01_sources/
+02_Prod/MODEL - YOLO - TFLITE/judd/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/koons/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/rothko/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/rothko2/01_sources/
+02_Prod/MODEL - YOLO - TFLITE/rothko-labellimg
+02_Prod/MODEL - YOLO - TFLITE/rothko-labellimg2
+02_Prod/MODEL - YOLO - TFLITE/rothko-labellimg3
+
+
+03_Render/judd-xp-1
+03_Render/EXTRAIT/MIX
+03_Render/EXTRAIT/rothko-xp-1
+
+venv/
+
+PyTorch-ONNX-TFLite/
